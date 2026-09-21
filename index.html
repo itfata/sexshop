@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Інтимні товари для неї, для нього та для двох. Анонімне пакування й оплата при отриманні.">
+  <title>Інтимні товари — каталог</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="service-top">
+    <div class="container service-top-row">
+      <span><i class="service-icon package-icon" aria-hidden="true"></i><strong>Анонімна доставка</strong> за 1–2 дні</span>
+      <span><i class="service-icon shield-icon" aria-hidden="true"></i><strong>Нейтральне пакування</strong> без назви магазину</span>
+      <span><i class="service-icon payment-icon" aria-hidden="true"></i><strong>Оплата при отриманні</strong></span>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container header-row">
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Відкрити меню"><span></span><span></span><span></span></button>
+      <a class="catalog-button" href="#catalog"><span class="grid-icon" aria-hidden="true"><i></i><i></i><i></i><i></i></span>Каталог</a>
+      <nav class="desktop-nav" aria-label="Головна навігація">
+        <a href="#catalog">Товари</a><a href="#delivery">Доставка й оплата</a><a href="#contacts">Контакти</a>
+      </nav>
+      <form class="header-search" role="search">
+        <label class="sr-only" for="searchInput">Пошук товарів</label><span class="search-icon" aria-hidden="true"></span>
+        <input id="searchInput" type="search" placeholder="Пошук товарів" autocomplete="off">
+        <button id="searchClear" type="button" aria-label="Очистити пошук" hidden>×</button>
+      </form>
+      <button id="cartButton" class="header-order" type="button" aria-label="Відкрити кошик"><span class="cart-icon" aria-hidden="true"><i></i></span><span>Кошик</span><b id="cartCount">0</b></button>
+    </div>
+    <nav id="mobileMenu" class="mobile-menu container" aria-label="Мобільна навігація" aria-hidden="true">
+      <a href="#catalog">Усі товари</a><a href="#delivery">Доставка й оплата</a><a href="#contacts">Контакти</a>
+    </nav>
+  </header>
+
+  <nav class="category-nav" aria-label="Категорії товарів">
+    <div class="container category-nav-row">
+      <button type="button" data-category-jump="Усі">Усі товари</button>
+      <button type="button" data-category-jump="Для неї">Для неї</button>
+      <button type="button" data-category-jump="Для нього">Для нього</button>
+      <button type="button" data-category-jump="Для двох">Для двох</button>
+      <button type="button" data-category-jump="Анальна стимуляція">Анальна стимуляція</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="benefits-showcase container" aria-label="Переваги магазину">
+      <article><span class="benefit-icon benefit-package" aria-hidden="true"><i></i></span><div><strong>Непрозоре пакування</strong><p>Без назви магазину та опису вмісту</p></div></article>
+      <article><span class="benefit-icon benefit-gift" aria-hidden="true"><i></i></span><div><strong>Подарунок до замовлення</strong><p>Лубрикант для акційних позицій</p></div></article>
+      <article><span class="benefit-icon benefit-delivery" aria-hidden="true"><i></i></span><div><strong>Відправка 1–2 дні</strong><p>Новою поштою по всій Україні</p></div></article>
+      <article><span class="benefit-icon benefit-payment" aria-hidden="true"><i></i></span><div><strong>Оплата при отриманні</strong><p>Перевіряєте посилку у відділенні</p></div></article>
+    </section>
+
+    <section id="catalog" class="catalog-section container">
+      <div class="section-heading"><div><p class="eyebrow">Каталог</p><h2>Знайдіть своє</h2></div><div class="catalog-tools"><p id="resultsCount" class="results-count" aria-live="polite"></p><label><span class="sr-only">Сортування</span><select id="sortSelect"><option value="featured">Рекомендовані</option><option value="price-asc">Спочатку дешевші</option><option value="price-desc">Спочатку дорожчі</option><option value="name">За назвою</option></select></label></div></div>
+      <div id="categoryFilters" class="filter-chips" aria-label="Категорії"></div>
+      <div id="catalogGrid" class="catalog-grid"></div>
+    </section>
+
+    <section class="reviews-section">
+      <div class="container">
+        <div class="reviews-heading"><div><p class="eyebrow">Відгуки покупців</p><h2>Про товари — відверто</h2></div><div class="reviews-score"><strong>5.0</strong><span>★★★★★</span><small>Відгуки з наданих товарних сторінок</small></div></div>
+        <div class="reviews-viewport" aria-label="Відгуки покупців"><div id="reviewsTrack" class="reviews-track"></div></div>
+      </div>
+    </section>
+
+    <section class="guide-section container">
+      <div class="guide-heading"><p class="eyebrow">Корисно знати</p><h2>Турбота про вас і ваші іграшки</h2><p>Короткі підказки допоможуть зберегти матеріали, гігієнічність і комфорт використання.</p></div>
+      <div class="guide-grid">
+        <article class="guide-card guide-card-care">
+          <div class="care-visual" aria-hidden="true"><div class="care-bottle"><i></i></div><span class="bubble bubble-one"></span><span class="bubble bubble-two"></span><span class="bubble bubble-three"></span><strong>Чисто.<br>Делікатно.<br>Безпечно.</strong></div>
+          <div class="guide-content"><p class="guide-number">01 · Догляд</p><h3>Як правильно очищувати іграшки</h3><p>Очищуйте до першого та після кожного використання. Водостійкі моделі промивайте теплою водою з м'яким засобом, а електронні частини не занурюйте без відповідного захисту.</p><ol class="care-steps"><li><span>1</span><div><strong>Перевірте інструкцію</strong><small>Спосіб очищення залежить від матеріалу та водостійкості.</small></div></li><li><span>2</span><div><strong>Обережно промийте</strong><small>Використовуйте теплу воду й м'який засіб без агресивних компонентів.</small></div></li><li><span>3</span><div><strong>Повністю висушіть</strong><small>Зберігайте окремо у чистому мішечку або контейнері.</small></div></li></ol></div>
+        </article>
+        <article class="guide-card guide-card-lube">
+          <div class="guide-image"><img src="assets/products/prostate/lubricant.png" alt="Лубрикант для інтимних іграшок" loading="lazy"><span>Лубрикант</span></div>
+          <div class="guide-content"><h3>Який лубрикант обрати</h3><p>Лубрикант на водній основі — найуніверсальніший вибір для інтимних іграшок. Для силіконових моделей не використовуйте силіконову основу без прямої рекомендації виробника.</p><ul><li>Водна основа сумісна з більшістю матеріалів</li><li>Починайте з невеликої кількості</li><li>Перевіряйте склад та інструкцію</li></ul></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacts" class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-adult"><strong>18+</strong><p>Товари для дорослих. Продаж особам віком від 18 років.</p></div>
+      <div><h2>Каталог</h2><nav><a href="#catalog">Усі товари</a><a href="#catalog" data-category-jump="Для неї">Для неї</a><a href="#catalog" data-category-jump="Для нього">Для нього</a><a href="#catalog" data-category-jump="Для двох">Для двох</a></nav></div>
+      <div id="delivery"><h2>Доставка й оплата</h2><p>Нова пошта по Україні, відправка протягом 1–2 робочих днів.</p><p>Оплата при отриманні у відділенні або поштоматі.</p></div>
+      <div><h2>Конфіденційність</h2><p>Непрозоре нейтральне пакування без назви магазину та опису вмісту.</p></div>
+    </div>
+    <div class="container footer-bottom"><span>© 2026 Каталог інтимних товарів</span><span>Тільки для повнолітніх · 18+</span></div>
+  </footer>
+
+  <div id="productModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <button class="modal-backdrop" type="button" data-close-modal aria-label="Закрити"></button>
+    <article class="product-dialog"><button class="modal-close" type="button" data-close-modal aria-label="Закрити">×</button><div id="productDetail"></div></article>
+  </div>
+  <div id="imageLightbox" class="image-lightbox" role="dialog" aria-modal="true" aria-label="Перегляд фото" hidden>
+    <button class="lightbox-backdrop" type="button" data-close-lightbox aria-label="Закрити фото"></button>
+    <button class="lightbox-close" type="button" data-close-lightbox aria-label="Закрити фото">×</button>
+    <img id="lightboxImage" src="" alt="">
+  </div>
+
+  <div id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <button class="cart-backdrop" type="button" data-close-cart aria-label="Закрити кошик"></button>
+    <aside class="cart-panel">
+      <header class="cart-header"><div><p>Ваше замовлення</p><h2 id="cartTitle">Кошик</h2></div><button type="button" data-close-cart aria-label="Закрити кошик">×</button></header>
+      <div id="cartItems" class="cart-items"></div>
+      <div id="cartEmpty" class="cart-empty"><strong>Кошик порожній</strong><p>Додайте товари з каталогу — вони збережуться тут.</p><button class="button button-primary" type="button" data-close-cart>Перейти до каталогу</button></div>
+      <div id="cartCheckout" class="cart-checkout" hidden>
+        <div class="cart-total"><span>Разом</span><strong id="cartTotal">0 ₴</strong></div>
+        <form id="checkoutForm" class="checkout-form" novalidate>
+          <h3>Оформлення замовлення</h3><p>Заповніть контактні дані. Поки CRM/API не підключено, форма зберігає лише локальну чернетку і нічого не надсилає.</p>
+          <div class="checkout-grid"><label>Ім'я<input name="firstName" required autocomplete="given-name"><small class="field-error"></small></label><label>Прізвище<input name="lastName" required autocomplete="family-name"><small class="field-error"></small></label></div>
+          <label>Номер телефону<input name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+380 XX XXX XX XX"><small class="field-error"></small></label>
+          <label>Електронна пошта<input name="email" type="email" inputmode="email" required autocomplete="email" placeholder="name@example.com"><small class="field-error"></small></label>
+          <label>Місто<input name="city" required autocomplete="address-level2" placeholder="Наприклад, Київ"><small class="field-error"></small></label>
+          <label>Відділення Нової пошти<input name="branch" required autocomplete="shipping street-address" placeholder="Номер або адреса відділення"><small class="field-error"></small></label>
+          <button class="button button-primary" type="submit">Зберегти чернетку</button><p id="checkoutMessage" class="checkout-message" aria-live="polite"></p>
+        </form>
+      </div>
+    </aside>
+  </div>
+  <div id="cartToast" class="cart-toast" role="status" aria-live="polite" hidden></div>
+  <script src="products.js"></script><script src="reviews.js"></script><script src="app.js"></script>
+</body>
+</html>
