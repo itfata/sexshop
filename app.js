@@ -340,3 +340,45 @@ renderCart();
 renderReviews();
 const initialProduct = new URLSearchParams(location.search).get("product");
 if (initialProduct) openProduct(initialProduct, false);
+
+// Keep the existing swipe gallery, advancing only on mobile screens.
+function initBenefitsCarousel() {
+  const gallery = document.querySelector(".benefits-showcase");
+  if (!gallery) return;
+  const cards = [...gallery.querySelectorAll("article")];
+  if (cards.length < 2) return;
+  const mobile = window.matchMedia("(max-width: 720px)");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let timer;
+  let interacting = false;
+  const stop = () => window.clearTimeout(timer);
+  const positions = () => cards.map((card) => Math.min(
+    card.getBoundingClientRect().left - gallery.getBoundingClientRect().left + gallery.scrollLeft,
+    gallery.scrollWidth - gallery.clientWidth
+  ));
+  function schedule() {
+    stop();
+    if (!mobile.matches || document.hidden || interacting || gallery.contains(document.activeElement)) return;
+    timer = window.setTimeout(() => {
+      const targets = positions();
+      const current = targets.reduce((closest, target, index) =>
+        Math.abs(target - gallery.scrollLeft) < Math.abs(targets[closest] - gallery.scrollLeft) ? index : closest, 0);
+      gallery.scrollTo({ left: targets[(current + 1) % cards.length], behavior: reducedMotion.matches ? "instant" : "smooth" });
+      schedule();
+    }, 10000);
+  }
+  gallery.addEventListener("scroll", schedule, { passive: true });
+  gallery.addEventListener("pointerdown", () => { interacting = true; stop(); }, { passive: true });
+  const release = () => { if (interacting) { interacting = false; schedule(); } };
+  window.addEventListener("pointerup", release, { passive: true });
+  window.addEventListener("pointercancel", release, { passive: true });
+  gallery.addEventListener("focusin", stop);
+  gallery.addEventListener("focusout", () => window.setTimeout(schedule, 0));
+  document.addEventListener("visibilitychange", schedule);
+  mobile.addEventListener("change", () => {
+    if (!mobile.matches) gallery.scrollTo({ left: 0, behavior: "instant" });
+    schedule();
+  });
+  schedule();
+}
+initBenefitsCarousel();
