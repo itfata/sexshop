@@ -1417,7 +1417,7 @@ window.PRODUCTS = [
     id: 28,
     slug: "vidalista-20-tadalafil",
     name: "Vidalista 20 — таблетки з тадалафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1458,7 +1458,7 @@ window.PRODUCTS = [
     id: 29,
     slug: "cenforce-150-sildenafil",
     name: "Cenforce 150 — таблетки із силденафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1497,7 +1497,7 @@ window.PRODUCTS = [
     id: 30,
     slug: "vilitra-20-vardenafil",
     name: "Vilitra 20 — таблетки з варденафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1538,7 +1538,7 @@ window.PRODUCTS = [
     id: 31,
     slug: "vidalista-professional-20-sublingual",
     name: "Vidalista Professional 20 — сублінгвальні таблетки",
-    category: "Для нього",
+    category: "Збудники",
     price: 990,
     oldPrice: 1980,
     discount: 50,
@@ -1574,7 +1574,7 @@ window.PRODUCTS = [
     id: 32,
     slug: "vidalista-40-tadalafil",
     name: "Vidalista 40 — таблетки з тадалафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1615,7 +1615,7 @@ window.PRODUCTS = [
     id: 33,
     slug: "vidalista-60-tadalafil",
     name: "Vidalista 60 — таблетки з тадалафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1651,7 +1651,7 @@ window.PRODUCTS = [
     id: 34,
     slug: "erex-professional-100-sildenafil",
     name: "Erex Professional 100 — таблетки із силденафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 790,
     oldPrice: 1580,
     discount: 50,
@@ -1689,7 +1689,7 @@ window.PRODUCTS = [
     id: 35,
     slug: "vidalista-black-80-tadalafil",
     name: "Vidalista Black 80 — таблетки з тадалафілом",
-    category: "Для нього",
+    category: "Збудники",
     price: 990,
     oldPrice: 1980,
     discount: 50,
@@ -1722,6 +1722,44 @@ window.PRODUCTS = [
       "assets/products/vidalista-black-80/3.jpg",
       "assets/products/vidalista-black-80/4.jpg",
       "assets/products/vidalista-black-80/5.jpg"
+    ]
+  },
+  {
+    id: 36,
+    slug: "female-libido-stimulant-4-tablets",
+    name: "Жіночий збудник — таблетки для лібідо, 4 шт.",
+    category: "Збудники",
+    price: 690,
+    oldPrice: 1380,
+    discount: 50,
+    short: "4 таблетки для жінок; склад і можливість застосування обов'язково уточніть у лікаря.",
+    description: "Таблетки позиціонуються постачальником як жіночий збудник для посилення лібідо та чутливості. На сторінці постачальника не вказано повний склад і діючу речовину, тому перед застосуванням обов'язково перевірте інформацію на упаковці та проконсультуйтеся з лікарем або фармацевтом.",
+    features: [
+      "4 таблетки в упаковці",
+      "Форма випуску — таблетки",
+      "Призначено для дорослих жінок",
+      "Перед застосуванням потрібна консультація лікаря"
+    ],
+    characteristics: [
+      ["Тип товару", "Збуджувальні таблетки для жінок"],
+      ["Форма випуску", "Таблетки"],
+      ["Кількість в упаковці", "4 шт."],
+      ["Стать", "Жіноча"],
+      ["Артикул джерела", "С 525"]
+    ],
+    details: [
+      "Постачальник рекомендує приймати одну таблетку за 30–40 хвилин до близькості та не перевищувати одну таблетку на добу. Дотримуйтеся насамперед інструкції на фактичній упаковці й рекомендацій лікаря.",
+      "Не застосовуйте під час вагітності. На сторінці постачальника також зазначені протипоказання при підвищеному артеріальному тиску, стенокардії, перенесеному інфаркті та гострій печінковій або нирковій недостатності.",
+      "Можливі небезпечні взаємодії з іншими ліками, зокрема деякими антибіотиками та протигрибковими засобами. Повідомте лікаря про всі препарати, які приймаєте.",
+      "У разі погіршення самопочуття, головного болю, запаморочення або порушень зору припиніть застосування та зверніться по медичну допомогу. Інформація на сторінці не замінює консультацію лікаря."
+    ],
+    images: [
+      "assets/products/female-stimulant-c525/1.jpg",
+      "assets/products/female-stimulant-c525/2.jpg",
+      "assets/products/female-stimulant-c525/3.jpg",
+      "assets/products/female-stimulant-c525/4.jpg",
+      "assets/products/female-stimulant-c525/5.jpg",
+      "assets/products/female-stimulant-c525/6.jpg"
     ]
   }
 ];
