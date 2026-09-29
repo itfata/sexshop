@@ -1131,6 +1131,7 @@ window.PRODUCTS = [
       "assets/products/mw/2.png",
       "assets/products/mw/3.png",
       "assets/products/mw/4.png",
+      "assets/products/mw/5.png",
       "assets/products/mw/6.png",
       "assets/products/mw/7.png"
     ],
