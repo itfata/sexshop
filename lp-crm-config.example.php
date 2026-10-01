@@ -7,4 +7,9 @@ return [
     'office' => '2',
     'delivery' => '1',
     'fallback_product_id' => '184',
+    'email_recipient' => 'EMAIL_ДЛЯ_ЗАМОВЛЕНЬ',
+    'site_name' => 'НАЗВА_САЙТУ',
+    'mail_from_domain' => 'ДОМЕН_САЙТУ',
+    'telegram_bot_token' => '',
+    'telegram_chat_id' => '',
 ];

@@ -17,6 +17,50 @@ function cleanText(mixed $value, int $maxLength = 255): string
     return function_exists('mb_substr') ? mb_substr($text, 0, $maxLength) : substr($text, 0, $maxLength);
 }
 
+function sendEmailNotification(array $config, string $subject, string $message): void
+{
+    $recipient = filter_var((string) ($config['email_recipient'] ?? ''), FILTER_VALIDATE_EMAIL);
+    if ($recipient === false || !function_exists('mail')) {
+        return;
+    }
+
+    $siteName = cleanText($config['site_name'] ?? 'Інтернет-магазин', 120);
+    $fromDomain = strtolower(cleanText($config['mail_from_domain'] ?? '', 180));
+    $headers = ['Content-Type: text/plain; charset=UTF-8'];
+    if ($fromDomain !== '' && preg_match('/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/', $fromDomain)) {
+        $headers[] = 'From: ' . $siteName . ' <no-reply@' . $fromDomain . '>';
+    }
+
+    $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    if (!mail($recipient, $encodedSubject, $message, implode("\r\n", $headers))) {
+        error_log('Order email notification could not be sent.');
+    }
+}
+
+function sendTelegramNotification(array $config, string $message): void
+{
+    $token = cleanText($config['telegram_bot_token'] ?? '', 255);
+    $chatId = cleanText($config['telegram_chat_id'] ?? '', 120);
+    if (!preg_match('/^\d+:[A-Za-z0-9_-]+$/', $token) || $chatId === '' || !function_exists('curl_init')) {
+        return;
+    }
+
+    $curl = curl_init('https://api.telegram.org/bot' . $token . '/sendMessage');
+    curl_setopt_array($curl, [
+        CURLOPT_POST => true,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POSTFIELDS => ['chat_id' => $chatId, 'text' => $message],
+        CURLOPT_CONNECTTIMEOUT => 5,
+        CURLOPT_TIMEOUT => 10,
+    ]);
+    $result = curl_exec($curl);
+    $status = (int) curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    curl_close($curl);
+    if ($result === false || $status < 200 || $status >= 300) {
+        error_log('Telegram order notification could not be sent.');
+    }
+}
+
 function postOrder(): never
 {
     if (!function_exists('curl_init')) {
@@ -165,6 +209,26 @@ function postOrder(): never
     }
 
     $crmOrderId = is_array($crmResult) ? ($crmResult['order_id'] ?? $crmResult['id'] ?? null) : null;
+    $notificationLines = [
+        'Нове замовлення',
+        'Номер: ' . ($crmOrderId ?: $orderId),
+        'Клієнт: ' . trim($firstName . ' ' . $lastName),
+        'Телефон: ' . $phone,
+        'Email: ' . $email,
+        'Доставка: ' . $city . ', Нова пошта: ' . $branch,
+        '',
+        'Товари:',
+        $cartSummary,
+        'Разом: ' . $total . ' грн',
+    ];
+    if ($customerComment !== '') {
+        $notificationLines[] = 'Коментар: ' . $customerComment;
+    }
+    $notificationMessage = implode("\n", $notificationLines);
+    $siteName = cleanText($config['site_name'] ?? 'Інтернет-магазин', 120);
+    sendEmailNotification($config, 'Нове замовлення з сайту «' . $siteName . '»', $notificationMessage);
+    sendTelegramNotification($config, "✅ " . $notificationMessage);
+
     jsonResponse(200, ['ok' => true, 'orderId' => $crmOrderId ?: $orderId]);
 }
 
