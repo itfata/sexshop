@@ -2238,5 +2238,43 @@ window.PRODUCTS = [
       "assets/products/oriental-massage-oil-100/6.png",
       "assets/products/oriental-massage-oil-100/7.png"
     ]
+  },
+  {
+    id: 50,
+    slug: "magoon-spanische-fliege-massage-oil-100",
+    name: "MAGOON Spanische Fliege — масажна олія, 100 мл",
+    category: "Масла",
+    price: 990,
+    oldPrice: 1580,
+    discount: 37,
+    short: "Масажна олія з нейтральним ароматом і жожоба для чуттєвого масажу тіла.",
+    description: "MAGOON Spanische Fliege — масажна олія об'ємом 100 мл з нейтральним ароматом та олією жожоба. Засіб призначений для зовнішнього розслаблювального й еротичного масажу: помірно густа текстура легко розподіляється по шкірі, забезпечує ковзання та допомагає пом'якшити її.",
+    features: [
+      "Нейтральний аромат",
+      "Олія жожоба",
+      "Об'єм 100 мл",
+      "Для масажу всього тіла"
+    ],
+    characteristics: [
+      ["Назва на упаковці", "MAGOON Erotic Massage Oil Spanische Fliege"],
+      ["Тип", "Масажна олія"],
+      ["Аромат", "Нейтральний"],
+      ["Рослинна олія", "Жожоба"],
+      ["Область застосування", "Тіло"],
+      ["Об'єм", "100 мл"],
+      ["Склад за інформацією постачальника", "Paraffinum Liquidum, Trilaureth-4 Phosphate, Isopropyl Palmitate, Polyglyceryl-2 Sesquiisostearate, Simmondsia Chinensis (Jojoba) Seed Oil, Benzyl Salicylate, Coumarin, Geraniol, Hydroxyisohexyl 3-Cyclohexene Carboxaldehyde, Linalool, Hexyl Cinnamal, Alpha-Isomethyl Ionone, Parfum"]
+    ],
+    details: [
+      "Нанесіть невелику кількість олії на долоні, зігрійте її та розподіліть м'якими масажними рухами по шкірі. За потреби додайте ще.",
+      "Засіб призначений лише для зовнішнього застосування. Не допускайте потрапляння в очі, на слизові оболонки, подразнену або пошкоджену шкіру.",
+      "Олійні засоби можуть пошкоджувати латекс. Не використовуйте з латексними презервативами або іншими латексними виробами, якщо сумісність прямо не підтверджена на фактичній упаковці.",
+      "Перед першим використанням звірте склад і термін придатності з фактичною упаковкою та зробіть тест на невеликій ділянці шкіри. У разі подразнення припиніть використання."
+    ],
+    images: [
+      "assets/products/spanische-fliege-massage-oil-100/1.png",
+      "assets/products/spanische-fliege-massage-oil-100/2.png",
+      "assets/products/spanische-fliege-massage-oil-100/3.png",
+      "assets/products/spanische-fliege-massage-oil-100/4.png"
+    ]
   }
 ];
