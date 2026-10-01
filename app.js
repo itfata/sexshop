@@ -366,7 +366,7 @@ function initBenefitsCarousel() {
         Math.abs(target - gallery.scrollLeft) < Math.abs(targets[closest] - gallery.scrollLeft) ? index : closest, 0);
       gallery.scrollTo({ left: targets[(current + 1) % cards.length], behavior: reducedMotion.matches ? "instant" : "smooth" });
       schedule();
-    }, 10000);
+    }, 3000);
   }
   gallery.addEventListener("scroll", schedule, { passive: true });
   gallery.addEventListener("pointerdown", () => { interacting = true; stop(); }, { passive: true });
