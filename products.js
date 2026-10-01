@@ -2196,5 +2196,47 @@ window.PRODUCTS = [
       "assets/products/jasmine-massage-oil-100/4.png",
       "assets/products/jasmine-massage-oil-100/5.png"
     ]
+  },
+  {
+    id: 49,
+    slug: "magoon-oriental-ecstasy-massage-oil-100",
+    name: "MAGOON Oriental Ecstasy — масажна олія, 100 мл",
+    category: "Масла",
+    price: 990,
+    oldPrice: 1580,
+    discount: 37,
+    short: "Преміальна масажна олія з жожоба та ніжним східним ароматом.",
+    description: "MAGOON Oriental Ecstasy — масажна олія об'ємом 100 мл з олією жожоба та ніжним східним ароматом. Засіб призначений для розслаблювального й еротичного масажу всього тіла: насичена текстура забезпечує тривале ковзання, а жожоба допомагає пом'якшити шкіру.",
+    features: [
+      "Ніжний східний аромат",
+      "Олія жожоба",
+      "Об'єм 100 мл",
+      "Тривале ковзання"
+    ],
+    characteristics: [
+      ["Назва на упаковці", "MAGOON Erotic Massage Oil Oriental Ecstasy"],
+      ["Тип", "Масажна олія"],
+      ["Аромат", "Східний"],
+      ["Рослинна олія", "Жожоба"],
+      ["Область застосування", "Тіло"],
+      ["Об'єм", "100 мл"],
+      ["Упаковка", "Флакон"],
+      ["Склад за інформацією постачальника", "Рідкий парафін, Trilaureth-4 Phosphate, Isopropyl Palmitate, Polyglyceryl-2 Sesquiisostearate, олія насіння Simmondsia Chinensis (жожоба), Benzyl Alcohol, Benzyl Salicylate, Eugenol, Coumarin, Geraniol, Butylphenyl Methylpropional, Linalool, Benzyl Benzoate, Citronellol, Hexyl Cinnamal, Limonene, ароматизатор"]
+    ],
+    details: [
+      "Нанесіть невелику кількість олії на долоні, зігрійте її та розподіліть м'якими масажними рухами по шкірі. За потреби додайте ще.",
+      "Засіб призначений для зовнішнього застосування. Не допускайте потрапляння в очі та не наносьте на подразнену або пошкоджену шкіру.",
+      "Олійні засоби можуть пошкоджувати латекс. Не використовуйте з латексними презервативами або іншими латексними виробами, якщо сумісність прямо не підтверджена на фактичній упаковці.",
+      "Перед першим використанням звірте склад і термін придатності з фактичною упаковкою та зробіть тест на невеликій ділянці шкіри. У разі подразнення припиніть використання."
+    ],
+    images: [
+      "assets/products/oriental-massage-oil-100/1.png",
+      "assets/products/oriental-massage-oil-100/2.png",
+      "assets/products/oriental-massage-oil-100/3.png",
+      "assets/products/oriental-massage-oil-100/4.png",
+      "assets/products/oriental-massage-oil-100/5.png",
+      "assets/products/oriental-massage-oil-100/6.png",
+      "assets/products/oriental-massage-oil-100/7.png"
+    ]
   }
 ];
