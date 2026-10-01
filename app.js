@@ -24,7 +24,7 @@ const reviewsTrack = document.getElementById("reviewsTrack");
 const initialReviews = window.STORE_REVIEWS || [];
 const cartToast = document.getElementById("cartToast");
 const supportedStatusBadges = new Set(["Хіт", "Новинка", "Акція"]);
-const orderApiUrl = String(window.STORE_CONFIG?.orderApiUrl || "").trim();
+const orderEndpoint = "index.php?action=order";
 let lastFocusedElement = null;
 let cart = {};
 let toastTimer = null;
@@ -34,11 +34,6 @@ try {
   if (!cart || Array.isArray(cart) || typeof cart !== "object") cart = {};
 } catch {
   cart = {};
-}
-
-if (!orderApiUrl) {
-  document.getElementById("checkoutIntro").textContent = "Заповніть контактні дані. До завершення налаштування KeyCRM форма зберігає чернетку лише у цьому браузері.";
-  checkoutForm.querySelector('button[type="submit"]').textContent = "Зберегти чернетку";
 }
 
 function escapeHtml(value) {
@@ -326,16 +321,17 @@ function orderMarketing() {
     .filter(([, value]) => value));
 }
 
-async function sendOrderToCrm(orderDraft) {
-  if (!orderApiUrl) return { delivered: false, reason: "not-configured" };
-  const response = await fetch(orderApiUrl, {
+async function sendOrder(orderDraft) {
+  const response = await fetch(orderEndpoint, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "application/json" },
-    credentials: "omit",
+    credentials: "same-origin",
     body: JSON.stringify(orderDraft)
   });
   const payload = await response.json().catch(() => ({}));
-  if (!response.ok || !payload.ok) throw new Error(payload.message || "Не вдалося передати замовлення до CRM.");
+  if (!response.ok || !payload.ok) {
+    throw new Error(payload.message || "Не вдалося передати замовлення. Перевірте з'єднання та спробуйте ще раз.");
+  }
   return { delivered: true, orderId: payload.orderId };
 }
 
@@ -359,16 +355,11 @@ checkoutForm.addEventListener("submit", async (event) => {
 
   const submitButton = checkoutForm.querySelector('button[type="submit"]');
   const checkoutMessage = document.getElementById("checkoutMessage");
-  if (!orderApiUrl) {
-    checkoutMessage.textContent = "Чернетку збережено лише у цьому браузері. Для відправлення до KeyCRM потрібно завершити налаштування захищеного шлюзу.";
-    return;
-  }
-
   submitButton.disabled = true;
   submitButton.textContent = "Надсилаємо…";
-  checkoutMessage.textContent = "Безпечно передаємо замовлення до KeyCRM…";
+  checkoutMessage.textContent = "Передаємо замовлення…";
   try {
-    const result = await sendOrderToCrm(orderDraft);
+    const result = await sendOrder(orderDraft);
     localStorage.removeItem("intim-store-pending-order-id");
     localStorage.removeItem("intim-store-last-order");
     checkoutMessage.textContent = result.orderId

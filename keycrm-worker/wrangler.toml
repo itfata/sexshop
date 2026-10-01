@@ -1,6 +1,0 @@
-name = "sexshop-keycrm-orders"
-main = "src/index.js"
-compatibility_date = "2026-10-01"
-
-[vars]
-ALLOWED_ORIGINS = "https://itfata.github.io,http://localhost:8000,http://127.0.0.1:8000"
