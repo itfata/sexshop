@@ -1,0 +1,14 @@
+{
+  "name": "sexshop-keycrm-orders",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "sync-catalog": "node scripts/sync-catalog.mjs",
+    "dev": "wrangler dev",
+    "deploy": "npm run sync-catalog && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

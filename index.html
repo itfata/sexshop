@@ -112,19 +112,20 @@
       <div id="cartCheckout" class="cart-checkout" hidden>
         <div class="cart-total"><span>Разом</span><strong id="cartTotal">0 ₴</strong></div>
         <form id="checkoutForm" class="checkout-form" novalidate>
-          <h3>Оформлення замовлення</h3><p>Заповніть контактні дані. Поки CRM/API не підключено, форма зберігає лише локальну чернетку і нічого не надсилає.</p>
+          <h3>Оформлення замовлення</h3><p id="checkoutIntro">Заповніть контактні дані — після оформлення ми зв'яжемося з вами для підтвердження.</p>
+          <label class="order-hp" aria-hidden="true">Ваш сайт<input name="website" tabindex="-1" autocomplete="off"></label>
           <div class="checkout-grid"><label>Ім'я<input name="firstName" required autocomplete="given-name"><small class="field-error"></small></label><label>Прізвище<input name="lastName" required autocomplete="family-name"><small class="field-error"></small></label></div>
           <label>Номер телефону<input name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+380 XX XXX XX XX"><small class="field-error"></small></label>
           <label>Електронна пошта<input name="email" type="email" inputmode="email" required autocomplete="email" placeholder="name@example.com"><small class="field-error"></small></label>
           <label>Місто<input name="city" required autocomplete="address-level2" placeholder="Наприклад, Київ"><small class="field-error"></small></label>
           <label>Відділення Нової пошти<input name="branch" required autocomplete="shipping street-address" placeholder="Номер або адреса відділення"><small class="field-error"></small></label>
           <label><span class="field-label"><span>Коментар до замовлення</span><span class="optional-field">необов'язково</span></span><textarea name="comment" rows="4" maxlength="500" placeholder="Наприклад: бажаний колір, зручний час для зв'язку або інше побажання"></textarea><small class="field-hint">До 500 символів</small></label>
-          <button class="button button-primary" type="submit">Зберегти чернетку</button><p id="checkoutMessage" class="checkout-message" aria-live="polite"></p>
+          <button class="button button-primary" type="submit">Оформити замовлення</button><p id="checkoutMessage" class="checkout-message" aria-live="polite"></p>
         </form>
       </div>
     </aside>
   </div>
   <div id="cartToast" class="cart-toast" role="status" aria-live="polite" hidden></div>
-  <script src="products.js"></script><script src="reviews.js"></script><script src="app.js"></script>
+  <script src="config.js"></script><script src="products.js"></script><script src="reviews.js"></script><script src="app.js"></script>
 </body>
 </html>

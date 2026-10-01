@@ -1,0 +1,5 @@
+.DS_Store
+**/.DS_Store
+node_modules/
+.wrangler/
+keycrm-worker/.dev.vars

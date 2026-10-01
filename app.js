@@ -24,6 +24,7 @@ const reviewsTrack = document.getElementById("reviewsTrack");
 const initialReviews = window.STORE_REVIEWS || [];
 const cartToast = document.getElementById("cartToast");
 const supportedStatusBadges = new Set(["Хіт", "Новинка", "Акція"]);
+const orderApiUrl = String(window.STORE_CONFIG?.orderApiUrl || "").trim();
 let lastFocusedElement = null;
 let cart = {};
 let toastTimer = null;
@@ -33,6 +34,11 @@ try {
   if (!cart || Array.isArray(cart) || typeof cart !== "object") cart = {};
 } catch {
   cart = {};
+}
+
+if (!orderApiUrl) {
+  document.getElementById("checkoutIntro").textContent = "Заповніть контактні дані. До завершення налаштування KeyCRM форма зберігає чернетку лише у цьому браузері.";
+  checkoutForm.querySelector('button[type="submit"]').textContent = "Зберегти чернетку";
 }
 
 function escapeHtml(value) {
@@ -185,15 +191,19 @@ function renderCart() {
   cartItems.innerHTML = entries.map(({ product, quantity: itemQuantity }) => `<article class="cart-item"><img src="${product.images[0]}" alt="${product.name}" loading="lazy" decoding="async"><div><h3>${product.name}</h3><strong>${money.format(product.price)} ₴</strong><div class="quantity-control"><button type="button" data-cart-minus="${product.slug}" aria-label="Зменшити кількість">−</button><span>${itemQuantity}</span><button type="button" data-cart-plus="${product.slug}" aria-label="Збільшити кількість">+</button><button class="remove-item" type="button" data-cart-remove="${product.slug}">Видалити</button></div></div></article>`).join("");
 }
 
-function showCartToast(product) {
+function showToast(title, message) {
   clearTimeout(toastTimer);
-  cartToast.innerHTML = `<strong>Додано до кошика</strong><span>${escapeHtml(product.name)}</span>`;
+  cartToast.innerHTML = `<strong>${escapeHtml(title)}</strong><span>${escapeHtml(message)}</span>`;
   cartToast.hidden = false;
   requestAnimationFrame(() => cartToast.classList.add("visible"));
   toastTimer = setTimeout(() => {
     cartToast.classList.remove("visible");
     setTimeout(() => { cartToast.hidden = true; }, 220);
   }, 2400);
+}
+
+function showCartToast(product) {
+  showToast("Додано до кошика", product.name);
 }
 
 function addToCart(slug, openCheckout = false) {
@@ -292,20 +302,46 @@ function validateCheckoutField(field) {
   return !message;
 }
 
-checkoutForm.querySelectorAll("input").forEach((field) => {
+checkoutForm.querySelectorAll("input[required]").forEach((field) => {
   field.addEventListener("blur", () => validateCheckoutField(field));
   field.addEventListener("input", () => { if (field.closest("label").classList.contains("field-invalid")) validateCheckoutField(field); });
 });
 
 async function saveOrderDraft(orderDraft) {
-  // CRM/API integration point: replace this local adapter when a real endpoint is connected.
   localStorage.setItem("intim-store-last-order", JSON.stringify(orderDraft));
-  return { delivered: false, storage: "local" };
+}
+
+function getOrderRequestId() {
+  const saved = localStorage.getItem("intim-store-pending-order-id");
+  if (saved) return saved;
+  const requestId = globalThis.crypto?.randomUUID?.() || `web-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  localStorage.setItem("intim-store-pending-order-id", requestId);
+  return requestId;
+}
+
+function orderMarketing() {
+  const params = new URLSearchParams(location.search);
+  return Object.fromEntries(["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"]
+    .map((key) => [key, params.get(key)?.trim()])
+    .filter(([, value]) => value));
+}
+
+async function sendOrderToCrm(orderDraft) {
+  if (!orderApiUrl) return { delivered: false, reason: "not-configured" };
+  const response = await fetch(orderApiUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    credentials: "omit",
+    body: JSON.stringify(orderDraft)
+  });
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.ok) throw new Error(payload.message || "Не вдалося передати замовлення до CRM.");
+  return { delivered: true, orderId: payload.orderId };
 }
 
 checkoutForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const fields = [...checkoutForm.querySelectorAll("input")];
+  const fields = [...checkoutForm.querySelectorAll("input[required]")];
   const valid = fields.map(validateCheckoutField).every(Boolean);
   if (!valid) {
     fields.find((field) => !field.validity.valid)?.focus();
@@ -317,8 +353,43 @@ checkoutForm.addEventListener("submit", async (event) => {
   orderDraft.items = cartEntries().map(({ product, quantity }) => ({ slug: product.slug, name: product.name, price: product.price, quantity }));
   orderDraft.total = orderDraft.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   orderDraft.createdAt = new Date().toISOString();
+  orderDraft.requestId = getOrderRequestId();
+  orderDraft.marketing = orderMarketing();
   await saveOrderDraft(orderDraft);
-  document.getElementById("checkoutMessage").textContent = "Чернетку збережено лише у цьому браузері. Замовлення не відправлено: CRM/API ще не підключено.";
+
+  const submitButton = checkoutForm.querySelector('button[type="submit"]');
+  const checkoutMessage = document.getElementById("checkoutMessage");
+  if (!orderApiUrl) {
+    checkoutMessage.textContent = "Чернетку збережено лише у цьому браузері. Для відправлення до KeyCRM потрібно завершити налаштування захищеного шлюзу.";
+    return;
+  }
+
+  submitButton.disabled = true;
+  submitButton.textContent = "Надсилаємо…";
+  checkoutMessage.textContent = "Безпечно передаємо замовлення до KeyCRM…";
+  try {
+    const result = await sendOrderToCrm(orderDraft);
+    localStorage.removeItem("intim-store-pending-order-id");
+    localStorage.removeItem("intim-store-last-order");
+    checkoutMessage.textContent = result.orderId
+      ? `Замовлення №${result.orderId} прийнято. Ми зв'яжемося з вами для підтвердження.`
+      : "Замовлення прийнято. Ми зв'яжемося з вами для підтвердження.";
+    submitButton.textContent = "Замовлення прийнято";
+    showToast("Замовлення прийнято", "Дякуємо! Очікуйте дзвінка для підтвердження.");
+    window.setTimeout(() => {
+      cart = {};
+      saveCart();
+      checkoutForm.reset();
+      renderCart();
+      closeCart();
+      submitButton.disabled = false;
+      submitButton.textContent = "Оформити замовлення";
+    }, 2200);
+  } catch (error) {
+    checkoutMessage.textContent = `${error.message} Чернетку збережено у цьому браузері — спробуйте ще раз.`;
+    submitButton.disabled = false;
+    submitButton.textContent = "Спробувати ще раз";
+  }
 });
 
 document.getElementById("cartButton").addEventListener("click", openCart);
