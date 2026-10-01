@@ -2118,5 +2118,44 @@ window.PRODUCTS = [
       "assets/products/lavender-massage-oil-200/5.png",
       "assets/products/lavender-massage-oil-200/6.png"
     ]
+  },
+  {
+    id: 47,
+    slug: "magoon-love-fantasy-jojoba-massage-oil-100",
+    name: "MAGOON Love Fantasy — масажна олія з жожоба, 100 мл",
+    category: "Масла",
+    price: 790,
+    oldPrice: 1580,
+    discount: 50,
+    short: "Масажна олія з жожоба та ніжним романтичним ароматом для догляду за шкірою.",
+    description: "MAGOON Love Fantasy — масажна олія об'ємом 100 мл з олією жожоба та ніжним романтичним ароматом. Засіб призначений для розслаблювального й еротичного масажу всього тіла; олійна текстура забезпечує плавне ковзання, а жожоба допомагає пом'якшити суху та нормальну шкіру. Олію також можна наносити на тіло після душу.",
+    features: [
+      "Олія жожоба",
+      "Ніжний романтичний аромат",
+      "Об'єм 100 мл",
+      "Для масажу та догляду за тілом"
+    ],
+    characteristics: [
+      ["Назва на упаковці", "MAGOON Love Fantasy Erotic Massage Oil"],
+      ["Тип", "Масажна олія"],
+      ["Рослинна олія", "Жожоба"],
+      ["Область застосування", "Тіло"],
+      ["Об'єм", "100 мл"],
+      ["Упаковка", "Флакон"],
+      ["Склад за інформацією постачальника", "Рідкий парафін, Trilaureth-4 Phosphate, Isopropyl Palmitate, Polyglyceryl-2 Sesquiisostearate, олія насіння Simmondsia Chinensis (жожоба), Benzyl Alcohol, Citral, Benzyl Salicylate, Coumarin, Butylphenyl Methylpropional, Linalool, Citronellol, Hexyl Cinnamal, Cinnamal, Limonene, Alpha-Isomethyl Ionone, ароматизатор"]
+    ],
+    details: [
+      "Нанесіть невелику кількість олії на долоні, зігрійте її та розподіліть м'якими масажними рухами по шкірі. За потреби додайте ще.",
+      "Засіб призначений для зовнішнього застосування. Не допускайте потрапляння в очі та не наносьте на подразнену або пошкоджену шкіру.",
+      "Олійні засоби можуть пошкоджувати латекс. Не використовуйте з латексними презервативами або іншими латексними виробами, якщо сумісність прямо не підтверджена на фактичній упаковці.",
+      "Перед першим використанням звірте склад і термін придатності з фактичною упаковкою та зробіть тест на невеликій ділянці шкіри. У разі подразнення припиніть використання."
+    ],
+    images: [
+      "assets/products/jojoba-massage-oil-100/1.png",
+      "assets/products/jojoba-massage-oil-100/2.png",
+      "assets/products/jojoba-massage-oil-100/3.png",
+      "assets/products/jojoba-massage-oil-100/4.png",
+      "assets/products/jojoba-massage-oil-100/5.png"
+    ]
   }
 ];
