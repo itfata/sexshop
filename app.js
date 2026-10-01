@@ -313,6 +313,7 @@ checkoutForm.addEventListener("submit", async (event) => {
     return;
   }
   const orderDraft = Object.fromEntries(new FormData(checkoutForm));
+  orderDraft.comment = orderDraft.comment.trim();
   orderDraft.items = cartEntries().map(({ product, quantity }) => ({ slug: product.slug, name: product.name, price: product.price, quantity }));
   orderDraft.total = orderDraft.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   orderDraft.createdAt = new Date().toISOString();
